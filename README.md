@@ -1,35 +1,13 @@
-# chartstyler.com
+# ChartStyler
 
-Source of the ChartStyler website, built with Jekyll and served by GitHub Pages at
-https://chartstyler.com.
+ChartStyler is a plugin for Adobe InDesign that builds charts from InDesign tables or CSV
+files as native InDesign objects, styled with your own object and paragraph styles.
 
-| Path | What |
-|---|---|
-| `index.html` | Homepage (stand-alone page, not the docs theme) |
-| `assets/` | Images for the homepage |
-| `docs/` | User documentation ([just-the-docs](https://just-the-docs.com/) theme), structured like the panel's tabs; its images are in `docs/assets/images/` |
-| `_includes/`, `_sass/` | Customisations of the docs theme |
-| `.github/workflows/pages.yml` | Builds and deploys the site in the public repo |
-| `CNAME` | Custom domain |
+- Website: [chartstyler.com](https://chartstyler.com)
+- Documentation: [chartstyler.com/docs](https://chartstyler.com/docs/)
+- Contact: [info@chartstyler.com](mailto:info@chartstyler.com)
 
-## Local preview
+This repository contains the source of the website and the documentation. The plugin itself
+is not open source.
 
-```bash
-bundle install
-bundle exec jekyll serve --livereload --destination /tmp/chartstyler-site
-```
-
-Then open http://localhost:4000 (documentation: http://localhost:4000/docs/).
-
-## Publishing
-
-The ChartStyler project is private; the site is published from the public repo
-[ChartStyler/chartstyler](https://github.com/ChartStyler/chartstyler). From the project root:
-
-```bash
-npm run publish:site -- --dry-run   # show what would change (account settings: scripts/build-config/site.json)
-npm run publish:site                # copy website/ to the public repo, commit and push
-```
-
-GitHub Actions in the public repo then builds the site (Settings → Pages → Source must be
-"GitHub Actions").
+© 2026 ChartStyler. All rights reserved.
