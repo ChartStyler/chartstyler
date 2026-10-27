@@ -5,7 +5,7 @@ files as native InDesign objects, styled with your own object and paragraph styl
 
 - Website: [chartstyler.com](https://chartstyler.com)
 - Documentation: [chartstyler.com/docs](https://chartstyler.com/docs/)
-- Contact: [info@chartstyler.com](mailto:info@chartstyler.com)
+- Support: [support@chartstyler.com](mailto:support@chartstyler.com)
 
 This repository contains the source of the website and the documentation. The plugin itself
 is not open source.
