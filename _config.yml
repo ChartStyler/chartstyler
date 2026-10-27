@@ -1,0 +1,19 @@
+title: ChartStyler
+description: InDesign plugin for building charts from InDesign tables
+theme: just-the-docs
+
+# Published by GitHub Pages from the public repo ChartStyler/chartstyler
+# (scripts/publish-site.mjs copies this folder there).
+url: "https://chartstyler.com"
+
+# The homepage (index.html) is a stand-alone page; the documentation lives in docs/
+# and uses the just-the-docs theme.
+
+# Navigation order
+nav_order_default: true
+
+plugins:
+  - jekyll-relative-links
+
+exclude:
+  - README.md

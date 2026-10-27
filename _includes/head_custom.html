@@ -1,0 +1,59 @@
+<script>
+  /* Use block comments only: the theme compresses the page onto one line, so a // comment
+     would swallow the rest of this script. */
+  document.addEventListener("DOMContentLoaded", function () {
+    var content = document.querySelector(".main-content");
+    if (!content) return;
+
+    /* Screenshots are captured at 2x (Retina), so show each image at half its pixel width.
+       The theme's img { max-width: 100% } still keeps wide images inside the content column.
+       Add {: .full-size } to an image in markdown to opt out. */
+    content.querySelectorAll("img:not(.full-size)").forEach(function (img) {
+      /* Make each image open at full size in a new tab, unless it is already a link. */
+      if (!img.closest("a")) {
+        var link = document.createElement("a");
+        link.href = img.getAttribute("src");
+        link.target = "_blank";
+        link.title = "Open full size";
+        link.className = "image-zoom";
+        img.parentNode.insertBefore(link, img);
+        link.appendChild(img);
+      }
+      function halve() {
+        if (img.naturalWidth) img.style.width = img.naturalWidth / 2 + "px";
+      }
+      if (img.complete) halve();
+      else img.addEventListener("load", halve);
+    });
+
+    /* Turn "(1)" to "(20)" in the text into numbered badges matching the screenshot
+       annotations. Code, links and headings are left alone. */
+    var pattern = /\(([1-9]|1[0-9]|20)\)/g;
+    var walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (node) {
+        if (!pattern.test(node.nodeValue)) return NodeFilter.FILTER_REJECT;
+        pattern.lastIndex = 0;
+        return node.parentElement.closest("code, pre, a, h1, h2, h3, h4, h5, h6, .callout")
+          ? NodeFilter.FILTER_REJECT
+          : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (node) {
+      var parts = node.nodeValue.split(pattern);
+      var frag = document.createDocumentFragment();
+      parts.forEach(function (part, i) {
+        if (i % 2 === 0) {
+          if (part) frag.appendChild(document.createTextNode(part));
+        } else {
+          var badge = document.createElement("span");
+          badge.className = "callout";
+          badge.textContent = part;
+          frag.appendChild(badge);
+        }
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+  });
+</script>

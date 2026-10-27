@@ -1,0 +1,37 @@
+// Custom overrides for the just-the-docs theme — kept separate from the theme's own
+// _sass files so upstream theme updates don't clobber these. See:
+// https://just-the-docs.com/docs/customization/
+
+// Screenshots in this doc set are captured at 2x (Retina) resolution, so their pixel
+// dimensions are double their intended display size. The theme's own base rule
+// (img { max-width: 100%; height: auto; }) only prevents overflow — it doesn't know
+// about the 2x capture — so apply this class to shrink them to their intended size.
+// Usage in markdown: ![alt text](assets/images/foo.png){: .screenshot }
+.screenshot {
+  max-width: 50%;
+}
+
+// Numbered badges that match the magenta annotation circles in the screenshots.
+// _includes/head_custom.html turns "(1)" in the text into <span class="callout">1</span>;
+// write the span by hand where the automatic conversion doesn't apply.
+.callout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.45em;
+  height: 1.45em;
+  padding: 0 0.3em;
+  border-radius: 0.725em;
+  background: #fe2e6b;
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: 0.1em;
+  box-sizing: border-box;
+}
+
+// Images are wrapped in a link to the full-size file by _includes/head_custom.html.
+.image-zoom {
+  cursor: zoom-in;
+}

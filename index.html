@@ -1,21 +1,197 @@
+---
+# Stand-alone homepage: no theme layout, and kept out of the docs' navigation and search.
+layout: null
+nav_exclude: true
+search_exclude: true
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InDesign Plugin Beta</title>
-    <style>
-        body { font-family: system-ui, sans-serif; text-align: center; padding: 50px; background: #f9f9f9; color: #333; }
-        .card { background: white; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .btn { display: inline-block; padding: 12px 24px; background: #FF385C; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; }
-        .btn:hover { background: #e03252; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChartStyler — charts for Adobe InDesign</title>
+  <meta name="description" content="ChartStyler is an Adobe InDesign plugin that builds charts as native InDesign objects from your tables, styled with your own object and paragraph styles.">
+  <link rel="icon" type="image/png" href="assets/images/chartstyler-icon.png">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f5f5f7;
+      --text: #1d1d1f;
+      --muted: #5f5f66;
+      --accent: #fe2e6b;
+      --accent-hover: #e0225a;
+      --border: #e2e2e6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #141416;
+        --bg-alt: #1d1d20;
+        --text: #f2f2f4;
+        --muted: #a3a3ab;
+        --border: #2e2e33;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+      color: var(--text);
+      background: var(--bg);
+    }
+    a { color: var(--accent); }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+    header { border-bottom: 1px solid var(--border); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { display: flex; align-items: center; color: var(--text); text-decoration: none; font-weight: 700; font-size: 1.15rem; }
+    .brand img { width: 32px; height: 32px; border-radius: 7px; margin-right: 10px; }
+    nav a { color: var(--text); text-decoration: none; margin-left: 24px; }
+    nav a:hover { color: var(--accent); }
+
+    .hero { padding: 72px 0 56px; }
+    .hero .wrap { display: flex; align-items: center; }
+    .hero-text { flex: 1; padding-right: 48px; }
+    .hero h1 { font-size: clamp(2rem, 4.5vw, 3.1rem); line-height: 1.15; margin: 0 0 18px; }
+    .hero p { font-size: 1.15rem; color: var(--muted); margin: 0 0 28px; }
+    .hero-image img { width: 300px; max-width: 100%; border-radius: 10px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18); }
+
+    .btn {
+      display: inline-block; padding: 12px 22px; border-radius: 8px; font-weight: 600;
+      text-decoration: none; margin: 0 10px 10px 0;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary { border: 1px solid var(--border); color: var(--text); }
+    .btn-secondary:hover { border-color: var(--accent); }
+
+    section { padding: 56px 0; }
+    section.alt { background: var(--bg-alt); }
+    h2 { font-size: 1.8rem; margin: 0 0 12px; }
+    .lead { color: var(--muted); margin: 0 0 32px; max-width: 680px; }
+
+    .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .feature { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 22px; }
+    .feature h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .feature p { margin: 0; color: var(--muted); }
+
+    .steps { counter-reset: step; list-style: none; padding: 0; margin: 0; max-width: 720px; }
+    .steps li { counter-increment: step; position: relative; padding: 0 0 22px 52px; }
+    .steps li::before {
+      content: counter(step); position: absolute; left: 0; top: 0;
+      width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-weight: 700;
+    }
+    .steps strong { display: block; }
+    .steps span { color: var(--muted); }
+
+    .chart-types { display: flex; flex-wrap: wrap; padding: 0; margin: 0; list-style: none; }
+    .chart-types li { border: 1px solid var(--border); border-radius: 999px; padding: 6px 16px; margin: 0 10px 10px 0; }
+
+    footer { border-top: 1px solid var(--border); padding: 28px 0; color: var(--muted); font-size: 0.9rem; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; }
+    footer a { color: var(--muted); }
+
+    @media (max-width: 760px) {
+      .hero .wrap { flex-direction: column; }
+      .hero-text { padding-right: 0; margin-bottom: 36px; }
+      .features { grid-template-columns: 1fr; }
+      nav a { margin-left: 16px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="card">
-        <h1>My Awesome InDesign Plugin</h1>
-        <p>Welcome to the private beta testing group.</p>
-        <a href="#" class="btn">Download Beta (.ccx)</a>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="./"><img src="assets/images/chartstyler-icon.png" alt="">ChartStyler</a>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="docs/">Documentation</a>
+      </nav>
     </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wrap">
+        <div class="hero-text">
+          <h1>Charts that are part of your InDesign layout</h1>
+          <p>ChartStyler builds charts from InDesign tables or CSV files as native InDesign
+            objects, styled with your own object and paragraph styles. No pasted images, no
+            round trips through other software.</p>
+          <a class="btn btn-primary" href="docs/getting-started.html">Get started</a>
+          <a class="btn btn-secondary" href="docs/">Read the documentation</a>
+        </div>
+        <div class="hero-image">
+          <img src="assets/images/panel.png" alt="The ChartStyler panel in InDesign">
+        </div>
+      </div>
+    </div>
+
+    <section class="alt" id="features">
+      <div class="wrap">
+        <h2>Made for print design</h2>
+        <p class="lead">ChartStyler works the way InDesign works, so charts fit your document,
+          your styles and your workflow.</p>
+        <div class="features">
+          <div class="feature">
+            <h3>Native InDesign objects</h3>
+            <p>Lines, shapes and text frames you can select, adjust and export like anything
+              else on the page.</p>
+          </div>
+          <div class="feature">
+            <h3>Your styles</h3>
+            <p>Charts use InDesign's object and paragraph styles, so they match the rest of the
+              publication.</p>
+          </div>
+          <div class="feature">
+            <h3>Data you can see</h3>
+            <p>Data lives in an InDesign table: paste it from Excel or import a CSV, and reload
+              the CSV when the numbers change.</p>
+          </div>
+          <div class="feature">
+            <h3>Always editable</h3>
+            <p>Every chart keeps its settings. Select it, change the data or the design, and
+              update it in place.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Two steps to a chart</h2>
+        <ol class="steps">
+          <li><strong>Put your data in an InDesign table</strong>
+            <span>Paste it in, or import a CSV file.</span></li>
+          <li><strong>Create the chart</strong>
+            <span>Pick a chart type and the table, set up the series and the design, and place
+              the chart on the page.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="alt">
+      <div class="wrap">
+        <h2>Chart types</h2>
+        <ul class="chart-types">
+          <li>Line</li>
+          <li>Bar</li>
+          <li>Horizontal bar</li>
+          <li>Area</li>
+          <li>Scatter</li>
+          <li>Pie</li>
+          <li>Donut</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 ChartStyler</span>
+      <a href="docs/">Documentation</a>
+    </div>
+  </footer>
 </body>
 </html>
