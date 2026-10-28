@@ -36,7 +36,7 @@ search_exclude: true
         testing it with InDesign users. As a beta tester you get early access to the plugin and
         a direct line to the developer: your feedback decides what gets fixed and improved first.</p>
 
-      <a class="btn btn-primary" href="https://tally.so/r/EqqELr">Sign up for the beta</a>
+      <a class="btn btn-primary" href="#signup">Sign up for the beta</a>
       <p class="small">By signing up you agree to the
         <a href="#terms">Beta Program Terms &amp; Conditions</a> below.</p>
 
@@ -57,6 +57,17 @@ search_exclude: true
       <p>After you sign up, we'll email you when there's a place for you in the beta, with the
         download and installation instructions. In the meantime, the
         <a href="docs/">documentation</a> shows how ChartStyler works.</p>
+
+      <h2 id="signup">Sign up</h2>
+      <!-- Tally embed: the form keeps its own (white) background so it stays readable in
+           dark mode; dynamicHeight lets embed.js resize the frame to the form. -->
+      <div class="form-embed">
+        <iframe data-tally-src="https://tally.so/embed/EqqELr?alignLeft=1&amp;hideTitle=1&amp;dynamicHeight=1"
+          loading="lazy" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0"
+          title="ChartStyler beta program sign-up form"></iframe>
+      </div>
+      <p class="small">Form not showing?
+        <a href="https://tally.so/r/EqqELr" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
     </div>
 
     <div class="wrap terms" id="terms">
@@ -140,5 +151,17 @@ search_exclude: true
       <span><a href="beta.html#terms">Beta terms</a> · <a href="beta.html">Beta program</a> · <a href="docs/">Documentation</a></span>
     </div>
   </footer>
+
+  <script>
+    /* Tally's standard embed loader: loads embed.js once, and falls back to plain iframes
+       if the script can't load. */
+    var d = document, w = "https://tally.so/widgets/embed.js", v = function () {
+      "undefined" != typeof Tally ? Tally.loadEmbeds() : d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) { e.src = e.dataset.tallySrc; });
+    };
+    if ("undefined" != typeof Tally) v();
+    else if (d.querySelector('script[src="' + w + '"]') == null) {
+      var s = d.createElement("script"); s.src = w; s.onload = v; s.onerror = v; d.body.appendChild(s);
+    }
+  </script>
 </body>
 </html>
